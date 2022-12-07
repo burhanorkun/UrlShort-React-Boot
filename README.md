@@ -14,9 +14,11 @@ orkun.li/slnk
     * [ ] Statistics page 
     * [ ] Chart or table with link clicks per day 
     * [ ] Button for deleting the link
-    * [ ] Deploy!
-    * [ ] Alias domain
 
 ---
+#### Optional
+  * [ ] Deploy!
+  * [ ] Alias domain
+
 
 #### Example
