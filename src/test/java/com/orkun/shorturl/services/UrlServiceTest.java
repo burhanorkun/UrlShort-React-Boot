@@ -1,10 +1,6 @@
-package com.orkun.shorturl;
+package com.orkun.shorturl.services;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
-
-@RunWith(MockitoJUnitRunner.class)
 public class UrlServiceTest {
 
 
