@@ -6,7 +6,8 @@ import lombok.experimental.Accessors;
 
 @Data
 @Builder
+@Accessors(chain = true)
 public class ShortUrlRequest {
-    private String shortUrl;
+    private String salt;
     private String originalUrl;
 }

@@ -1,23 +1,13 @@
-package com.orkun.shorturl.strategies.url;
+package com.orkun.shorturl.utils;
 
-import com.orkun.shorturl.utils.Base62Conversion;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.net.URL;
 
-@Service
-@AllArgsConstructor
-public class UrlShortenerService {
+@Component
+public class ValidationUtils {
 
-    private final Base62Conversion conversion;
-
-    public String longToShort(String request){
-
-        return "";
-    }
-
-    public static boolean isValidUrl(String url){
+    public boolean isValidUrl(String url){
         try{
             if(url.length() > 355){
                 System.out.println("URL length not acceptable. url=" + url);

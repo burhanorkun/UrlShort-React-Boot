@@ -1,13 +1,14 @@
 package com.orkun.shorturl.utils;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service
+@Component
 public class Base62Conversion {
     private static final String baseString
             = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    private char[] baseChars = baseString.toCharArray();
-    private int base = baseChars.length;
+    private final char[] baseChars = baseString.toCharArray();
+    private final int base = baseChars.length;
 
     public long decode(String input){
         var chars = input.toCharArray();

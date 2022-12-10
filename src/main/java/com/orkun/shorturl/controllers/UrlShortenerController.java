@@ -16,23 +16,28 @@ public class UrlShortenerController {
     // todo: create url service for logic
     private final ShortenerService urlService;
 
+
     @GetMapping("/")
     public String baseMessage(){
         return "This is URL shortener service";
     }
 
-    @GetMapping("/{shortUrl}")
-    public String getOriginalUrl(@PathVariable String shortUrl){
-        // todo: retrieve from service
-        return urlService.getOriginalUrl(shortUrl);
+    @ApiOperation(value="get shorten URL from database", notes ="Method retrieves long url from url database")
+    @GetMapping("/url")
+    @ResponseBody
+    public String getOriginalUrl(@RequestParam String url){
+        return urlService.getOriginalUrl(url);
     }
 
     @ApiOperation(value="Create shorten URL", notes ="Method converts long url to short url")
     @PostMapping("/url")
-    //@ResponseBody
-    public void createShortUrl(@RequestBody ShortUrlRequest request){
-        //log.info("Original URL is {}", request.getOriginalUrl());
-        // todo: add service to create shorturl
-        urlService.createShortUrl(request.getOriginalUrl());
+    @ResponseBody
+    public String createShortUrl(@RequestBody ShortUrlRequest request){  //@RequestBody ShortUrlRequest request
+        log.info("Original URL is {}", request.getOriginalUrl());
+        try {
+            return urlService.createShortUrl(request.getOriginalUrl());
+        } catch (Exception e) {
+            return "Not found URL";
+        }
     }
 }
