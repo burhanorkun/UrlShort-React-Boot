@@ -3,6 +3,7 @@ package com.orkun.shorturl.services;
 import com.orkun.shorturl.dtos.DataRecords;
 import com.orkun.shorturl.enums.ActionEnum;
 import com.orkun.shorturl.models.DataRecord;
+import com.orkun.shorturl.models.ShortUrl;
 import com.orkun.shorturl.strategies.ShortenerContext;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,10 @@ public class ShortenerService {
         urlRecords.setAllUrlRecords(allRecords);
 
         return urlRecords;
+    }
+
+    public void deleteUrlRecord(Long id){
+        shortenerContext.deleteRecord(id, ActionEnum.URL);
     }
 
     public String getOriginalQr(String shortUrl) {

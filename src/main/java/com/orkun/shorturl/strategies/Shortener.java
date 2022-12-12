@@ -14,4 +14,6 @@ public interface Shortener {
     ActionEnum getAction();
 
     List<DataRecord> getAllRecords();
+
+    void deleteRecord(Long id);
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Loader from "react-loader-spinner";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const [link, setlink] = useState("");
@@ -40,6 +41,7 @@ const HomePage = () => {
             <button className="title">Shortener Link</button>
           </a>
         </nav>
+
         <div className="form">
           {loading ? (
             <div className="link">
@@ -61,16 +63,20 @@ const HomePage = () => {
           )}
           <form onSubmit={add}>
             <input
-              type="url"
+              type="text"
               onChange={(e) => setlink(e.target.value)}
               placeholder="Enter your link "
               pattern="http(s?)(:\/\/)((www.)?)(([^.]+)\.)([^.]+)"
               required
             />
-            <button type="button" className="btn btn-dark" onClick={add}>
+            <button type="submit" className="btn btn-dark" onClick={add}>
               Shorten
             </button>
           </form>
+        </div>
+        <div className="links">
+          <Link to="/all">All Records</Link>
+          <Link to="/statistic">Statistics</Link>
         </div>
       </div>
     </div>

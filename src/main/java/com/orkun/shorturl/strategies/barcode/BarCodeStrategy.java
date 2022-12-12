@@ -33,4 +33,9 @@ public class BarCodeStrategy implements Shortener {
         throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED, "BARCODE not implemented yet");
     }
 
+    @Override
+    public void deleteRecord(Long id) {
+        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED, "BARCODE not implemented yet");
+    }
+
 }

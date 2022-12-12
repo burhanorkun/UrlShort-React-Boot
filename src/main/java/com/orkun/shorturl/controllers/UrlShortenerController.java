@@ -4,7 +4,10 @@ import com.orkun.shorturl.dtos.DataRecords;
 import com.orkun.shorturl.dtos.LongUrlResponse;
 import com.orkun.shorturl.dtos.ShortUrlRequest;
 import com.orkun.shorturl.dtos.ShortUrlResponse;
+import com.orkun.shorturl.models.DataRecord;
+import com.orkun.shorturl.models.ShortUrl;
 import com.orkun.shorturl.services.ShortenerService;
+import com.orkun.shorturl.services.StatisticService;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,10 +20,11 @@ import java.util.List;
 @Slf4j
 @AllArgsConstructor
 @RequestMapping("/api/v1")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UrlShortenerController {
-
-    // todo: create url service for logic
     private final ShortenerService urlService;
+
+    private final StatisticService statisticService;
 
     @GetMapping("/")
     public String baseMessage(){
@@ -45,6 +49,7 @@ public class UrlShortenerController {
         try {
             String shortUrl = urlService.createShortUrl(request.getUrl());
             shortUrlResponse.setUrl(shortUrl);
+            shortUrlResponse.setLongUrl(request.getUrl());
             return shortUrlResponse;
         } catch (Exception e) {
             shortUrlResponse.setUrl("Not found URL");
@@ -52,11 +57,27 @@ public class UrlShortenerController {
         }
     }
 
-    @ApiOperation(value = "")
+    @ApiOperation(value = "Retrieve all URL links")
     @GetMapping("/url/all")
     @ResponseBody
-    public DataRecords gelAllLinks(){
-        DataRecords allUrlRecords = urlService.getAllUrlRecords();
-        return allUrlRecords;
+    public DataRecords gelAllUrlLinks(){
+        return urlService.getAllUrlRecords();
     }
+
+    @ApiOperation(value = "Retrieve all URL links")
+    @DeleteMapping("/url/{id}")
+    @ResponseBody
+    public void deleteAllUrlLink(@PathVariable Long id){
+        urlService.deleteUrlRecord(id);
+    }
+
+    @ApiOperation(value = "Retrieve all URL links with Statistic")
+    @GetMapping("/url/statistic")
+    @ResponseBody
+    public List<ShortUrl> gelUrlStatistic(){
+        return statisticService.getAllShortUrlByOrder();
+    }
+
+
+
 }

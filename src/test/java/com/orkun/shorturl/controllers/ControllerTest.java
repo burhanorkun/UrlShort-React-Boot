@@ -1,86 +1,65 @@
 package com.orkun.shorturl.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.orkun.shorturl.ShorturlApplication;
-import com.orkun.shorturl.dtos.ShortUrlRequest;
+import com.orkun.shorturl.dtos.DataRecords;
+import com.orkun.shorturl.models.DataRecord;
+import com.orkun.shorturl.models.ShortUrl;
 import com.orkun.shorturl.services.ShortenerService;
+import com.orkun.shorturl.services.StatisticService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import static org.hamcrest.Matchers.*;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-//@RunWith(SpringRunner.class)
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@SpringBootTest(classes = {ShorturlApplication.class})
-//@AutoConfigureMockMvc
-//@WebAppConfiguration
+@RunWith(MockitoJUnitRunner.class)
 public class ControllerTest {
-    //@MockBean
-    private ShortenerService shortenerService;
 
-    //@Autowired
     private MockMvc mockMvc;
 
-    private static final String input = "www.google.com";
-    private static final String output = "drT23f";
+    @InjectMocks
+    private UrlShortenerController controller;
+
+    @Mock
+    private ShortenerService urlService;
+
+    @Mock
+    private StatisticService statisticService;
+
 
     @Before
     public void setup(){
-
-        //when(shortenerService.createShortUrl(input)).thenReturn(output);
-        /*
-        this.webTestClient = WebTestClient
-                .bindToServer()
-                .baseUrl("http://localhost:" + randomServerPort)
-                .build(); */
+        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 
-    //@Test
-    public void GIVEN_valid_url_WHEN_calling_put_THEN_return_ok_and_shortUrl_in_response() throws Exception{
-        when(shortenerService.createShortUrl(input)).thenReturn(output);
+    @Test
+    public void getAllShortenUrl() throws Exception{
 
-        ShortUrlRequest request = ShortUrlRequest.builder().url(input).salt("test").build();
-        ObjectMapper mapper = new ObjectMapper();
+        List<DataRecord> list = Arrays.asList(
+        ShortUrl.builder().key("key1").longUrl("www.google.com").build(),
+        ShortUrl.builder().key("key2").longUrl("www.test.com").build() );
 
-        mockMvc.perform(post("/api/v1/url")
-                        .content(mapper.writeValueAsString(request))
-                        .contentType(MediaType.APPLICATION_JSON))
-                        .andExpect(MockMvcResultMatchers.jsonPath("$.url", equalTo(output)));
-                        //.andExpect(MockMvcResultMatchers.jsonPath("$.longUrl", equalTo(input)));
-        /*
-        final var shortUrlResponse = new ShortUrlResponse().setLongUrl("http://localhost/").setUrl("key");
-        when(mockService.createShortUrl(any())).thenReturn("key");
+        DataRecords records = new DataRecords();
+        records.setAllUrlRecords(list);
 
-        webTestClient.post()
-                .uri("/api/v1/url")
-                .bodyValue(shortUrlResponse)
-                .exchange()
-                .expectStatus().isCreated()
-                .expectHeader().exists("Location")
-                .expectBody(ShortUrlResponse.class)
-                .value(d -> assertNotNull(d.getUrl()))
-                .value(d -> assertNotNull(d.getLongUrl()));
+        when(urlService.getAllUrlRecords()).thenReturn(records);
 
-        verify(mockService, times(1)).createShortUrl(any());
+        mockMvc.perform(get("/api/v1/url/all"))
+                .andExpect(status().isOk());
 
-         */
     }
 
-    //@Test
-    void GIVEN_url_too_short_WHEN_calling_create_THEN_return_BAD_REQUEST() {
+    @Test
+    public void GIVEN_url_too_short_WHEN_calling_create_THEN_return_BAD_REQUEST() {
 
     }
 }

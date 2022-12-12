@@ -4,12 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,13 +15,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "short_url")
-//@SequenceGenerator(name = "short_url_sequence", sequenceName = "short_url_sequence",  initialValue = 10000, allocationSize = 1)
-//@NamedQuery(name = "ShortUrl.findByLongUrl", query = "SELECT u FROM ShortUrl u WHERE LOWER(u.longUrl) = LOWER(?1)")
-public class ShortUrl implements DataRecord{
-
+@Table(name = "short_url_log")
+public class ShortUrlLog {
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO, generator = "short_url_sequence")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
@@ -35,9 +29,9 @@ public class ShortUrl implements DataRecord{
     @Column(nullable = false)
     private String longUrl;
 
+    @Column(name = "client_ip")
+    private String clientIp;
+
     @Column(name = "created_at")
     private LocalDateTime createdDate;
-
-    private Long viewed;
-
 }

@@ -30,7 +30,6 @@ public class ShortUrlTest {
 
     @After
     public void tearDown(){
-        //todo: release test class
     }
 
     @BeforeClass

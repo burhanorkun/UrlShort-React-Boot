@@ -1,10 +1,9 @@
 package com.orkun.shorturl.strategies.url;
 
-import com.orkun.shorturl.dtos.DataRecords;
 import com.orkun.shorturl.enums.ActionEnum;
 import com.orkun.shorturl.models.DataRecord;
 import com.orkun.shorturl.models.ShortUrl;
-import com.orkun.shorturl.repositories.ShortenerRepository;
+import com.orkun.shorturl.repositories.ShortUrlRepository;
 import com.orkun.shorturl.strategies.Shortener;
 import com.orkun.shorturl.utils.ValidationUtil;
 import lombok.AllArgsConstructor;
@@ -25,7 +24,7 @@ public class UrlShortenerStrategy implements Shortener {
     private static final byte[] VALID_CHARS
             = "ABCEDFGHIJKLMNOPQRSTUVWXYZabcedefghijklmnopqrstuvwxyz0123456789-_".getBytes();
     private final ValidationUtil validation;
-    private final ShortenerRepository repository;
+    private final ShortUrlRepository repository;
 
     @Override
     public ActionEnum getAction() {
@@ -42,6 +41,10 @@ public class UrlShortenerStrategy implements Shortener {
         var shortUrl = repository.findByKey(key);
         if (shortUrl == null)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "URL not found");
+
+        Long viewed = shortUrl.getViewed();
+        shortUrl.setViewed(++viewed);
+        repository.save(shortUrl);
 
         return shortUrl.getLongUrl();
     }
@@ -61,6 +64,7 @@ public class UrlShortenerStrategy implements Shortener {
         var shortUrl = ShortUrl.builder()
                 .longUrl(longUrl)
                 .createdDate(LocalDateTime.now())
+                .viewed(0l)
                 .key(key).build();
         repository.save(shortUrl);
 
@@ -70,6 +74,11 @@ public class UrlShortenerStrategy implements Shortener {
     public List<DataRecord> getAllRecords(){
         List<ShortUrl> all = repository.findAll();
         return new ArrayList<>(all);
+    }
+
+    @Override
+    public void deleteRecord(Long id) {
+        repository.deleteById(id);
     }
 
     private String createUniqueKey(){

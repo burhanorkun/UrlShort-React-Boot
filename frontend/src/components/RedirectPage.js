@@ -15,7 +15,7 @@ const RedirectPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   if (error === true) {
-    return <div className="error">Böyle Bir Link Yok</div>
+    return <div className="error">No Such Link (Böyle Bir Link Yok)</div>
   }
   if (redirect !== "") {
     window.location.assign(redirect);

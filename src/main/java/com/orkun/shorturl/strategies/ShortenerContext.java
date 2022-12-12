@@ -39,4 +39,11 @@ public class ShortenerContext {
                 .map(Shortener::getAllRecords)
                 .toList().get(0);
     }
+
+    public void deleteRecord(Long id, ActionEnum action){
+        converters.stream()
+                .filter(c -> c.getAction().equals(action))
+                .limit(1)
+                .forEach(c -> c.deleteRecord(id));
+    }
 }

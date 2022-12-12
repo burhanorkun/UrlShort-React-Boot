@@ -33,4 +33,9 @@ public class QrCodeStrategy implements Shortener {
         throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED, "QRCODE not implemented yet");
     }
 
+    @Override
+    public void deleteRecord(Long id) {
+        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED, "QRCODE not implemented yet");
+    }
+
 }
