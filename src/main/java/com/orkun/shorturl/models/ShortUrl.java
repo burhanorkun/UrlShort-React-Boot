@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -17,24 +18,24 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @Table(name = "short_url")
-@SequenceGenerator(name = "short_url_sequence", sequenceName = "short_url_sequence",  initialValue = 10000, allocationSize = 1)
+//@SequenceGenerator(name = "short_url_sequence", sequenceName = "short_url_sequence",  initialValue = 10000, allocationSize = 1)
 @NamedQuery(name = "ShortUrl.findByLongUrl", query = "SELECT u FROM ShortUrl u WHERE LOWER(u.longUrl) = LOWER(?1)")
 public class ShortUrl {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "short_url_sequence")
+    //@GeneratedValue(strategy = GenerationType.AUTO, generator = "short_url_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
-    private int randNum;
+    @NotBlank(message = "Key should not be blank")
+    private String key;
 
-    @NotBlank(message = "Full URL {javax.validation.constraints.NotBlank.message}")
-    @Size(min = 9, max = 2048, message = "Field [url] length should be more than 8 and less or equal to 2048")
+    @NotBlank(message = "Full URL cannot be blank")
+    @URL
     @Column(nullable = false)
     private String longUrl;
 
     @Column(name = "created_at")
     private LocalDateTime createdDate;
 
-    //private String slug;
 }

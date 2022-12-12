@@ -15,7 +15,7 @@ public class ShortenerService {
         return shortenerContext.shortToLong(shortUrl, ActionEnum.URL);
     }
 
-    public String createShortUrl(String originalUrl) throws Exception {
+    public String createShortUrl(String originalUrl) {
         return shortenerContext.longToShort(originalUrl, ActionEnum.URL);
     }
 
@@ -23,7 +23,7 @@ public class ShortenerService {
         return shortenerContext.shortToLong(shortUrl, ActionEnum.QRCODE);
     }
 
-    public String createShortQr(String originalUrl) throws Exception{
+    public String createShortQr(String originalUrl){
         return shortenerContext.longToShort(originalUrl, ActionEnum.QRCODE);
     }
 
@@ -31,7 +31,7 @@ public class ShortenerService {
         return shortenerContext.shortToLong(shortUrl, ActionEnum.BARCODE);
     }
 
-    public String createShortBarCode(String originalUrl) throws Exception{
+    public String createShortBarCode(String originalUrl){
         return shortenerContext.longToShort(originalUrl, ActionEnum.BARCODE);
     }
 }

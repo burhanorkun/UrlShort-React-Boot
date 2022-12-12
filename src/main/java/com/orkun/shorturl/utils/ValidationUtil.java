@@ -5,21 +5,21 @@ import org.springframework.stereotype.Component;
 import java.net.URL;
 
 @Component
-public class ValidationUtils {
+public class ValidationUtil {
 
     public boolean isValidUrl(String url){
         try{
-            if(url.length() > 355){
-                System.out.println("URL length not acceptable. url=" + url);
-                return false;
-            }else{
-                new URL(url).toURI();
-                return true;
-            }
+            new URL(url).toURI();
+            return true;
         } catch (Exception e) {
             System.out.println("Not a valid URL = " + url);
             System.out.println("Exception: " + e.getMessage());
             return false;
         }
+    }
+
+    public String conventionControl(String url){
+        if(url.trim().startsWith("http://") || url.trim().startsWith("https://")) return url;
+        return "http://" + url.trim();
     }
 }

@@ -2,7 +2,9 @@ package com.orkun.shorturl.strategies.barcode;
 
 import com.orkun.shorturl.enums.ActionEnum;
 import com.orkun.shorturl.strategies.Shortener;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 @Component
 public class BarCodeStrategy implements Shortener {
@@ -12,18 +14,15 @@ public class BarCodeStrategy implements Shortener {
     public ActionEnum getAction() {
         return ActionEnum.BARCODE;
     }
+
     @Override
     public String longToShort(String input) {
-        // not implemented
-        // java.lang.UnsupportedOperationException("Not supported yet.");
-        return "not implemented";
+        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED, "BARCODE not implemented yet");
     }
 
     @Override
     public String shortToLong(String input) {
-        // not implemented
-        // java.lang.UnsupportedOperationException("Not supported yet.");
-        return "not implemented";
+        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED, "BARCODE not implemented yet");
     }
 
 }

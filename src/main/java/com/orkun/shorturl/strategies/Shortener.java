@@ -4,7 +4,7 @@ import com.orkun.shorturl.enums.ActionEnum;
 
 public interface Shortener {
 
-    String longToShort(String input) throws Exception;
+    String longToShort(String input);
 
     String shortToLong(String input);
 
