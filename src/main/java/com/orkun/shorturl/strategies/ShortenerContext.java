@@ -1,6 +1,7 @@
 package com.orkun.shorturl.strategies;
 
 import com.orkun.shorturl.enums.ActionEnum;
+import com.orkun.shorturl.models.DataRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,15 @@ public class ShortenerContext {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Url");
 
         return converters.stream()
-                .filter(c -> c.getAction() == action)
+                .filter(c -> c.getAction().equals(action))
                 .map(c -> c.longToShort(url))
+                .toList().get(0);
+    }
+
+    public List<DataRecord> getAllRecords(ActionEnum action){
+        return converters.stream()
+                .filter(c -> c.getAction().equals(action))
+                .map(Shortener::getAllRecords)
                 .toList().get(0);
     }
 }

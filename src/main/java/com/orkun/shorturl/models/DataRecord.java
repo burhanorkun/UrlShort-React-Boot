@@ -1,2 +1,4 @@
-package com.orkun.shorturl.models;public interface DataRecord {
+package com.orkun.shorturl.models;
+
+public interface DataRecord {
 }

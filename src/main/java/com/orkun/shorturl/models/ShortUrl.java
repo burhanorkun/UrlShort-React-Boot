@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @Table(name = "short_url")
 //@SequenceGenerator(name = "short_url_sequence", sequenceName = "short_url_sequence",  initialValue = 10000, allocationSize = 1)
 @NamedQuery(name = "ShortUrl.findByLongUrl", query = "SELECT u FROM ShortUrl u WHERE LOWER(u.longUrl) = LOWER(?1)")
-public class ShortUrl {
+public class ShortUrl implements DataRecord{
 
     @Id
     //@GeneratedValue(strategy = GenerationType.AUTO, generator = "short_url_sequence")

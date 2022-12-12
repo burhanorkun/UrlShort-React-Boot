@@ -1,5 +1,6 @@
 package com.orkun.shorturl.controllers;
 
+import com.orkun.shorturl.dtos.DataRecords;
 import com.orkun.shorturl.dtos.LongUrlResponse;
 import com.orkun.shorturl.dtos.ShortUrlRequest;
 import com.orkun.shorturl.dtos.ShortUrlResponse;
@@ -10,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -19,7 +21,6 @@ public class UrlShortenerController {
 
     // todo: create url service for logic
     private final ShortenerService urlService;
-
 
     @GetMapping("/")
     public String baseMessage(){
@@ -49,5 +50,13 @@ public class UrlShortenerController {
             shortUrlResponse.setUrl("Not found URL");
             return shortUrlResponse;
         }
+    }
+
+    @ApiOperation(value = "")
+    @GetMapping("/url/all")
+    @ResponseBody
+    public DataRecords gelAllLinks(){
+        DataRecords allUrlRecords = urlService.getAllUrlRecords();
+        return allUrlRecords;
     }
 }

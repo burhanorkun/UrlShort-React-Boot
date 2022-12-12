@@ -1,6 +1,9 @@
 package com.orkun.shorturl.strategies;
 
 import com.orkun.shorturl.enums.ActionEnum;
+import com.orkun.shorturl.models.DataRecord;
+
+import java.util.List;
 
 public interface Shortener {
 
@@ -9,4 +12,6 @@ public interface Shortener {
     String shortToLong(String input);
 
     ActionEnum getAction();
+
+    List<DataRecord> getAllRecords();
 }

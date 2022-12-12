@@ -1,6 +1,8 @@
 package com.orkun.shorturl.strategies.url;
 
+import com.orkun.shorturl.dtos.DataRecords;
 import com.orkun.shorturl.enums.ActionEnum;
+import com.orkun.shorturl.models.DataRecord;
 import com.orkun.shorturl.models.ShortUrl;
 import com.orkun.shorturl.repositories.ShortenerRepository;
 import com.orkun.shorturl.strategies.Shortener;
@@ -12,6 +14,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 @Component
@@ -61,6 +65,11 @@ public class UrlShortenerStrategy implements Shortener {
         repository.save(shortUrl);
 
         return key;
+    }
+
+    public List<DataRecord> getAllRecords(){
+        List<ShortUrl> all = repository.findAll();
+        return new ArrayList<>(all);
     }
 
     private String createUniqueKey(){
