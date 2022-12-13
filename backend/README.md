@@ -4,7 +4,7 @@
 ---
 A simple full stack app for creating short urls like bit.ly
 
-orkun.li/slnk
+[orkun.li/slnk](orkun.li/slnk)
 
 *  [x] Simple link shortener service (similar to bit.ly)
     * [x] Front page
@@ -16,11 +16,35 @@ orkun.li/slnk
     * [x] Statistics page 
     * [x] Chart or table with link clicks per day 
     * [x] Button for deleting the link
+    * [x] Docker
+    * [x] Docker Compose
+    * [ ] Terraform for AWS Beanstalk
 
 ---
 #### Optional
   * [ ] Deploy!
   * [ ] Alias domain
 
+---
+### Main Screen, by React
 
+![alt text](../assets/main_screen.jpg "Main Screen")
+
+---
+### Short Url Service
+
+![alt text](../assets/main_screen2.jpg "Products Screen")
+
+---
+### All URL recrods
+
+![alt text](../assets/all_records.jpg "All Records")
+
+---
+### Some URL statistics like how many called <i>(under construction)</i>
+
+![alt text](../assets/statistics.jpg "All Records")
+
+
+---
 #### Example
