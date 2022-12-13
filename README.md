@@ -18,6 +18,8 @@ A simple full stack app for creating short urls like bit.ly
     * [x] Button for deleting the link
     * [x] Docker
     * [x] Docker Compose
+    * [ ] QR Code Implementation
+    * [ ] BARCODE implementation
     * [ ] Terraform for AWS Beanstalk
 
 ---
