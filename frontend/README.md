@@ -1,14 +1,13 @@
-# UrlShortener
+# Short URL Frontend Section
 
-UrlShortener React <br/>
+Short Url React <br/>
 
-# Installation
+# Install
 
 ```shell
-cd frontend
-npm install
+cd frontend && npm install
 ```
 
-# Starting the app
+# Start
 
 `cd frontend && npm start`
