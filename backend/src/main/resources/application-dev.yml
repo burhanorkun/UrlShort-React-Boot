@@ -18,3 +18,9 @@ spring:
     console:
       enabled: true
       path: /h2
+
+# ddl-auto values ->
+# validate: validate the schema, makes no changes to the database.
+# update: update the schema.
+# create: creates the schema, destroying previous data.
+# create-drop: drop the schema at the end of the session.

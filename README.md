@@ -28,6 +28,14 @@ A simple full stack app for creating short urls like bit.ly
   * [ ] Alias domain
 
 ---
+## Start backend
+* Go inside backend folder then type  ```mvn spring-boot:run``` to launch backend.
+* Or you can type ```mvn clean package``` to generate a JAR file and then start server with ```java -jar path/to/jar/file``` (Normally in inside backend/target/) 
+
+## Start frontend
+* Go inside frontend folder and then type ```npm run start```
+
+---
 ### Main Screen, by React
 
 ![alt text](./assets/main_screen.jpg "Main Screen")
