@@ -1,23 +1,22 @@
 server:
   port: 8080
 
-spring:
-  main:
-    banner-mode: "off"
-  datasource:
-    url: jdbc:mysql://db:3306/shortUrl
-    #driverClassName: org.h2.Driver
-    driverClassName: com.mysql.cj.jdbc.Driver
-    username: root
-    password: password
-  jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
-    show-sql: true
-    hibernate:
-      ddl-auto: update
+
+#spring:
+#  main:
+#    banner-mode: "off"
+#  datasource:
+#    url: jdbc:mysql://db:3306/urldb
+#    driverClassName: com.mysql.cj.jdbc.Driver
+#    username: root
+#    password: password
+#  jpa:
+#    database-platform: org.hibernate.dialect.MySQL8Dialect
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: create-drop
 
   # validate: validate the schema, makes no changes to the database.
   # update: update the schema.
   # create: creates the schema, destroying previous data.
   # create-drop: drop the schema at the end of the session.
-

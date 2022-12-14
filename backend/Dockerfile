@@ -2,8 +2,7 @@ FROM maven:3.8.5-openjdk-17
 
 MAINTAINER Burhan ORKUN <burhanorkun@gmail.com>
 
-RUN mkdir -p "/product/backend" && \
-    mkdir uploads
+RUN mkdir -p "/product/backend"
 
 WORKDIR /product/backend
 
@@ -11,4 +10,4 @@ COPY . ./
 
 RUN mvn clean install
 
-CMD ["mvn", "spring-boot:run","-Dspring-boot.run.profiles=dev"]
+CMD ["mvn", "spring-boot:run","-Dspring-boot.run.profiles=test"]

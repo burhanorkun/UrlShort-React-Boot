@@ -17,7 +17,7 @@ spring:
     show-sql: true
     hibernate:
       #ddl-auto: create-drop
-      ddl-auto: update
+      ddl-auto: create-drop
 
   # validate: validate the schema, makes no changes to the database.
   # update: update the schema.
