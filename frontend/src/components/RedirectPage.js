@@ -12,7 +12,6 @@ const RedirectPage = () => {
       .get(`${BASE_URL}?link=${link.link}`)
       .then((res) => setredirect(res.data.url))
       .catch(() => seterror(true))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   if (error === true) {
     return <div className="error">No Such Link (Böyle Bir Link Yok)</div>

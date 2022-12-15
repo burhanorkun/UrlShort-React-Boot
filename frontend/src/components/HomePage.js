@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Loader from "react-loader-spinner";
 import { Link } from "react-router-dom";
+import { async } from "q";
 
 const HomePage = () => {
   const [link, setlink] = useState("");
@@ -16,9 +17,6 @@ const HomePage = () => {
     setloading(true);
     //console.log("basladi");
     axios
-      /*.post(BASE_URL, {
-        link: link,
-      }) */
       .post(BASE_URL, {
         "salt": "",
         "url": link

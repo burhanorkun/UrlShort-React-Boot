@@ -53,8 +53,8 @@ public class ShortUrlTest {
         constraintViolations = validator.validate(shortUrl);
         assertEquals(2, constraintViolations.size());
         violation = constraintViolations.iterator().next();
-        assertEquals("Full URL cannot be blank", violation.getMessage());
-        assertEquals("longUrl", violation.getPropertyPath().toString());
+        assertEquals("Key should not be blank", violation.getMessage());
+        assertEquals("key", violation.getPropertyPath().toString());
     }
 
     @Test
